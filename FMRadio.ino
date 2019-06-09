@@ -1,3 +1,7 @@
+#include <radio.h>
+#include <TEA5767.h>
+
+TEA5767 radio;
 
 int potPin = 2; // input pin for the potentiometer (station tuner)
 
@@ -8,6 +12,9 @@ int dial = 0; // index of stations (0-43)
 void setup() {
   Serial.begin(9600);
   Serial.println("starting");
+  radio.init();
+  radio.debugEnable();
+  radio.setMono(false);
 }
 
 int getStation() {
@@ -16,11 +23,16 @@ int getStation() {
   return (43./1023.) * analogRead(potPin);
 }
 
-void loop() {
+void setStation() {
   dial = getStation();
   Serial.print("Station number: "); 
   Serial.print(dial);
   Serial.print(" which is station: ");
   Serial.println(stations[dial]);
+  radio.setBandFrequency(RADIO_BAND_FM, stations[dial]);
+}
+
+void loop() {
+  setStation();
   delay(1000);
 }
