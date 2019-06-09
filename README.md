@@ -12,3 +12,4 @@ This project provides code and wiring diagrams for building an FM radio in [Ardu
 ## Acknowledgements
 
 * [Potentiometer Tutorial](https://www.arduino.cc/en/Tutorial/Potentiometer)
+* [List of FM stations in NYC](http://www.nyradioguide.com/freqlist.htm)
