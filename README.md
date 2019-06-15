@@ -8,6 +8,7 @@ This project provides code and wiring diagrams for building an FM radio in [Ardu
 
 * [TEA5767 FM Stereo Radio Module](https://amzn.to/2WUAYb7)
 * [10K Potentiometer](https://amzn.to/2WtFVIq) for the station tuner
+* [0.96" I2C 128x64 OLED LCD Display](https://amzn.to/2Ik1HpA)
 
 ## Acknowledgements
 

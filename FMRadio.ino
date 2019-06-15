@@ -1,5 +1,9 @@
 #include <radio.h>
 #include <TEA5767.h>
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
 TEA5767 radio;
 
@@ -10,11 +14,30 @@ uint16_t stations[] = {8775,8810,8830,8870,8890,8910,8910,8950,8990,9030,9030,90
 int dial = 0; // index of stations (0-43)
 int current = 0;
 
+// OLED display
+#define SCREEN_WIDTH  128 // in pixels
+#define SCREEN_HEIGHT  64 
+#define OLED_RESET      4 
+#define OLED_ADDRESS 0x3C // usually, despite the circuit imprint (use the i2c_scanner to confirm)
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+bool OLED = false;
+
 void setup() {
   Serial.begin(9600);
+
+  // initialize the radio
   radio.init();
   radio.debugEnable();
   radio.setMono(false);
+
+  // initialize the display
+  OLED = display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDRESS);
+  if(!OLED) { 
+    Serial.println(F("OLED display setup failed"));
+  } else {
+    display.display();
+    display.clearDisplay();
+  }
 }
 
 int getStation() {
