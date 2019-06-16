@@ -11,6 +11,10 @@ This project provides code and wiring diagrams for building an FM radio in [Ardu
 * [10K Potentiometer](https://amzn.to/2WtFVIq) for the station tuner
 * [0.96" I2C 128x64 OLED LCD Display](https://amzn.to/2Ik1HpA)
 
+### Speakers
+
+It is possible to use a pair of [8 Ohm speakers](https://amzn.to/2IPS5C1) with an [LM386 audio amplifier](https://amzn.to/2Kmj4Z6), but a simpler and more robust option is to use a cheap usb speaker like [this one](https://amzn.to/2WJEwZy) or [this one](https://amzn.to/2XfpQWl), with a [usb audio adapter cable](https://amzn.to/2IJOUM1) (if not included with the speaker).
+
 ## Wiring
 
 Both the TEA5767 and OLED connect to the same [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) pins on the Arduino, but because their device addresses are different, they can use the [common I2C bus](https://www.arduino.cc/en/Reference/Wire) without conflict.
@@ -37,7 +41,7 @@ Finally, note that these connections are based on the [Arduino Uno](https://amzn
 
 * Outer pin (either left or right) -> Arduino GND
 * Other outer pin (opposite side)  -> Arduino 5V
-* Middle pin -> Arduino A2 (this can be any available analog pin; its value is set by the `int potPin` variable in the code) 
+* Middle pin -> Arduino A2 (this can be any available analog pin; its value is set by the `int potPin` variable in the code)
 
 ## Acknowledgements
 
