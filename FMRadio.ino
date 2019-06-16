@@ -9,7 +9,7 @@ TEA5767Radio radio = TEA5767Radio();
 
 int potPin = 2; // input pin for the potentiometer (station tuner)
 
-int availableStations = sizeof(stations) / sizeof(float);
+int availableStations = (sizeof(stations) / sizeof(float)) - 1;
 
 int dial = 0; // index of available stations
 int current = 0;
@@ -33,9 +33,9 @@ void setup() {
   if(!displayAvailable) { 
     Serial.println(F("OLED display setup failed"));
   } else {
-    Serial.println(F("success"));
     display.display();
     display.clearDisplay();
+    randomSeed(analogRead(0));
   }
 }
 
@@ -63,6 +63,24 @@ void updateDisplay(int index) {
   delay(100);
   display.invertDisplay(false);
   delay(100);
+
+  // randomly scroll in a particular direction
+  display.stopscroll();
+  long direction = random(4);
+  switch (direction) {
+    case 0:
+      display.startscrollright(0x00, 0x0F);
+      break;
+    case 1:
+      display.startscrollleft(0x00, 0x0F);
+      break;
+    case 2:
+      display.startscrolldiagright(0x00, 0x07);
+      break;
+    case 3:
+      display.startscrolldiagleft(0x00, 0x07);
+      break;    
+  }
 }
 
 void loop() {
