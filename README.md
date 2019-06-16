@@ -4,6 +4,8 @@
 
 This project provides code and wiring diagrams for building an FM radio in [Arduino](https://www.arduino.cc/) using the [TEA5767 FM Stereo Radio Module](https://amzn.to/2WUAYb7).
 
+The [stations list](stations.h) is specific to [New York City](http://www.nyradioguide.com/freqlist.htm), but can be edited as needed.
+
 ## Parts
 
 * [Arduino Uno](https://amzn.to/2IlsEJt) or a [clone](https://amzn.to/2MOoApe)
