@@ -1,16 +1,17 @@
-#include <radio.h>
-#include <TEA5767.h>
+#include <Wire.h>
+#include <TEA5767Radio.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <avr/pgmspace.h>
 
-TEA5767 radio;
+TEA5767Radio radio = TEA5767Radio();
 
 int potPin = 2; // input pin for the potentiometer (station tuner)
 
 // FM radio stations in NY: http://www.nyradioguide.com/freqlist.htm
-uint16_t stations[] = {8775,8810,8830,8870,8890,8910,8910,8950,8990,9030,9030,9030,9070,9110,9150,9230,9270,9310,9350,9390,9470,9550,9630,9670,9710,9790,9830,9870,9950,10030,10070,10110,10190,10270,10310,10350,10390,10430,10510,10550,10590,10670,10710,10750};
+float stations[] = {87.75,88.10,88.30,88.70,88.90,89.10,89.10,89.50,89.90,90.30,90.30,90.30,90.70,91.10,91.50,92.30,92.70,93.10,93.50,93.90,94.70,95.50,96.30,96.70,97.10,97.90,98.30,98.70,99.50,100.30,100.70,101.10,101.90,102.70,103.10,103.50,103.90,104.30,105.10,105.50,105.90,106.70,10710,107.50};
+
 int dial = 0; // index of stations (0-43)
 int current = 0;
 
@@ -59,7 +60,7 @@ const char sta42[] PROGMEM = "106.7 WLTW Lite FM";
 const char sta43[] PROGMEM = "107.1 WXPK The Peak";
 const char sta44[] PROGMEM = "107.5 WBLS";
 const char *const callLetters[] PROGMEM = {sta1, sta2, sta3, sta4, sta5, sta6, sta7, sta8, sta9, sta10, sta11, sta12, sta13, sta14, sta15, sta16, sta17, sta18, sta19, sta20, sta21, sta22, sta23, sta24, sta25, sta26, sta27, sta28, sta29, sta30, sta31, sta32, sta33, sta34, sta35, sta36, sta37, sta38, sta39, sta40, sta41, sta42, sta43, sta44};
-char stationBuffer[26]; // size is based on largest string in callLetters
+char stationBuffer[27]; // size is based on largest string in callLetters + 1
 
 // OLED display
 #define SCREEN_WIDTH  128 // in pixels
@@ -69,16 +70,11 @@ char stationBuffer[26]; // size is based on largest string in callLetters
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 bool displayAvailable = false;
 
-// helper for injecting callLetters[] with the F() macro required by the display
-#define FS(x) (__FlashStringHelper*) (x)
-
 void setup() {
   Serial.begin(9600);
 
   // initialize the radio
-  radio.init();
-  radio.debugEnable();
-  radio.setMono(false);
+  Wire.begin();
   
   // initialize the display
   displayAvailable = display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDRESS);
@@ -89,7 +85,6 @@ void setup() {
     display.display();
     display.clearDisplay();
   }
-
 }
 
 int getStation() {
@@ -98,17 +93,20 @@ int getStation() {
   return (43./1023.) * analogRead(potPin);
 }
 
-void updateDisplay(int dial) {
+void updateDisplay(int index) {
   display.clearDisplay();
 
   display.setTextSize(2);
   display.setTextColor(WHITE);
   display.setCursor(0, 0);
-  strcpy_P(stationBuffer, (char*)pgm_read_word(&(callLetters[dial])));
+
+  // get the display label for this dial setting (index)
+  strcpy_P(stationBuffer, (char*)pgm_read_word(&(callLetters[index])));
+  Serial.println(stationBuffer);
   display.println(stationBuffer);
   display.display();
 
-  // Invert and restore display, pausing in-between
+  // emphasize the update: invert and restore display, pausing in-between
   display.invertDisplay(true);
   delay(100);
   display.invertDisplay(false);
@@ -119,11 +117,10 @@ void loop() {
   current = getStation();
   if (current != dial ) {
     dial = current;
-    Serial.println(dial);
-    //radio.setBandFrequency(RADIO_BAND_FM, stations[dial]);
+    radio.setFrequency(stations[dial]);
     if (displayAvailable) {
       updateDisplay(dial);
     }
   } 
-  delay(1000);
+  delay(500);
 }

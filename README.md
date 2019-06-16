@@ -14,4 +14,4 @@ This project provides code and wiring diagrams for building an FM radio in [Ardu
 
 * [Potentiometer Tutorial](https://www.arduino.cc/en/Tutorial/Potentiometer)
 * [List of FM stations in NYC](http://www.nyradioguide.com/freqlist.htm)
-* [Arduino Radio Library](http://www.mathertel.de/Arduino/RadioLibrary.aspx)
+* [Arduino Library for the TEA5767 FM radio receiver module](https://github.com/simonmonk/arduino_TEA5767)
