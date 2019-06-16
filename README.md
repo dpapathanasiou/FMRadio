@@ -21,7 +21,7 @@ It is possible to use a pair of [8 Ohm speakers](https://amzn.to/2IPS5C1) with a
 
 Both the TEA5767 and OLED connect to the same [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) pins on the Arduino, but because their device addresses are different, they can use the [common I2C bus](https://www.arduino.cc/en/Reference/Wire) without conflict.
 
-Use the [I2C scanner](https://playground.arduino.cc/Main/I2cScanner/) to check the addresses of actual hardware being used. Device conflicts cana be resolved, but it is a [more significant undertaking](https://create.arduino.cc/projecthub/chipmc/arduino-i2c-multi-master-approach-why-and-how-93f638).
+Use the [I2C scanner](https://playground.arduino.cc/Main/I2cScanner/) to check the addresses of actual hardware being used. Device conflicts can be resolved, but it is a [more significant undertaking](https://create.arduino.cc/projecthub/chipmc/arduino-i2c-multi-master-approach-why-and-how-93f638).
 
 Finally, note that these connections are based on the [Arduino Uno](https://amzn.to/2IlsEJt); the [Mega2560](https://amzn.to/2KTp8aY), [Leonardo](https://amzn.to/2WHgyy1), and [Due](https://amzn.to/2FacTmw) use [different pins for SDA and SCL](https://www.arduino.cc/en/Reference/Wire).
 
