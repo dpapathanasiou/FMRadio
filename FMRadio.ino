@@ -61,6 +61,7 @@ const char sta43[] PROGMEM = "107.1 WXPK The Peak";
 const char sta44[] PROGMEM = "107.5 WBLS";
 const char *const callLetters[] PROGMEM = {sta1, sta2, sta3, sta4, sta5, sta6, sta7, sta8, sta9, sta10, sta11, sta12, sta13, sta14, sta15, sta16, sta17, sta18, sta19, sta20, sta21, sta22, sta23, sta24, sta25, sta26, sta27, sta28, sta29, sta30, sta31, sta32, sta33, sta34, sta35, sta36, sta37, sta38, sta39, sta40, sta41, sta42, sta43, sta44};
 char stationBuffer[27]; // size is based on largest string in callLetters + 1
+int availableStations = sizeof(stations) / sizeof(float);
 
 // OLED display
 #define SCREEN_WIDTH  128 // in pixels
@@ -89,8 +90,8 @@ void setup() {
 
 int getStation() {
   // convert the value read from potentiometer (0-1023) 
-  // into an index corresponding to the stations (0-43)
-  return (43./1023.) * analogRead(potPin);
+  // into an index corresponding to the stations
+  return (availableStations/1023.) * analogRead(potPin);
 }
 
 void updateDisplay(int index) {
