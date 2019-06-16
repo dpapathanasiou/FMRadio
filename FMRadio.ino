@@ -79,7 +79,7 @@ void updateDisplay(int index) {
       break;
     case 3:
       display.startscrolldiagleft(0x00, 0x07);
-      break;    
+      break;
   }
 }
 
