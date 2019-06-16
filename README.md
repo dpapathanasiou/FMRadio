@@ -48,3 +48,4 @@ Finally, note that these connections are based on the [Arduino Uno](https://amzn
 * [Potentiometer Tutorial](https://www.arduino.cc/en/Tutorial/Potentiometer)
 * [List of FM stations in NYC](http://www.nyradioguide.com/freqlist.htm)
 * [Arduino Library for the TEA5767 FM radio receiver module](https://github.com/simonmonk/arduino_TEA5767)
+* [Adafruit OLED Libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples)
