@@ -46,6 +46,6 @@ Finally, note that these connections are based on the [Arduino Uno](https://amzn
 ## Acknowledgements
 
 * [Potentiometer Tutorial](https://www.arduino.cc/en/Tutorial/Potentiometer)
-* [List of FM stations in NYC](http://www.nyradioguide.com/freqlist.htm)
+* [List of FM stations in NYC](http://www.nyradioguide.com/freqlist.htm) supplemented by [Radio-Locator.com](https://radio-locator.com/cgi-bin/locate?select=city&city=New+York&state=NY&band=FM&is_lic=Y&is_cp=Y&is_fl=Y&is_fx=Y&is_fb=Y&format=&dx=0&radius=&freq=&sort=freq)
 * [Arduino Library for the TEA5767 FM radio receiver module](https://github.com/simonmonk/arduino_TEA5767)
 * [Adafruit OLED Libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples)
